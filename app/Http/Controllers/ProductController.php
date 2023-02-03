@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
+use App\Http\Resources\Product as ProductResource;
 
-class ProductController extends Controller
+
+class ProductController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        $products = Product::all();
+        return $this->sendResponse( ProductResource::collection($products), "Összes termék");
     }
 
     /**
@@ -25,7 +30,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return Product::create($request->all());
+        $product = $request->all();
+
+        $validator = Validator::make( $product, [
+            "name" => "required",
+            "itemNumber" => "required",
+            "quantity" => "required",
+            "price" => "required"
+        ]);
+
+        if($validator->fails()) {
+            return $this->sendError( $validator, "Termék felvétele sikertelen");
+        }
+
+        $product = Product::create( $product );
+
+        return $this->sendResponse( new ProductResource($product), "üzenet");
     }
 
     /**
