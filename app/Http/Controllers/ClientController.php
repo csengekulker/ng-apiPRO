@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Http\Resources\ClientResource;
+use App\Models\Client;
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Http\Request;
+
+class ClientController extends BaseController
+{
+  public function all_clients()
+  {
+
+    $clients = Client::all();
+
+    return $this->sendResponse(ClientResource::collection($clients), "OK");
+  }
+
+  public function add_new_client(Request $request)
+  {
+    $input = $request->all();
+    $id = $request->id;
+
+    print_r($input);
+
+    //TODO: verify if client exists, add on condition
+    $clients = $this->get_client_by_id($id);
+
+    $validator = Validator::make($input, [
+      "fullName" => "required",
+      "dob" => "required",
+      "email" => "required",
+      "phone" => "required",
+      "fullAddress" => "required",
+
+    ]);
+
+    if ($validator->fails()) {
+      return $this->sendError($validator->errors());
+    }
+
+    $client = Client::create($input);
+
+    return $this->sendResponse(new ClientResource($client), "Vendeg felvéve");
+  }
+
+  public function get_client_by_id($id)
+  {
+    $client = Client::find($id);
+
+    if ( is_null($client)) {
+      return $this->sendError("Vendeg nem talalhato.");
+    }
+
+    return $this->sendResponse( new ClientResource($client), "A vendeg adatai");
+  }
+
+  public function modify_client(Request $request, $id)
+  {
+  }
+  public function remove_client($id)
+  {
+  }
+}

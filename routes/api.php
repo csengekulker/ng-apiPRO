@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ClientController;
+
+
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +32,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::post('/products', [ProductController::class, 'store']);
+
+Route::get('/clients', [ClientController::class, 'all_clients']);
+Route::get('clients/{id}', [ClientController::class, 'get_client_by_id']);
+Route::post('/clients', [ClientController::class, 'add_new_client']);
+Route::put('/clients/{id}', [ClientController::class, 'modify_client']);
+Route::delete('clients/{id}', [ClientController::class, 'remove_client']);
+
+Route::get('/bookings', [BookingController::class, 'all_bookings']);
+Route::post('bookings', [BookingController::class, 'new_booking']);
 
 Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/signin', [AuthController::class, 'login']);
