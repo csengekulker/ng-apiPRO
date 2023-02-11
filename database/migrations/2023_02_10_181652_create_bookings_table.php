@@ -17,7 +17,7 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->foreignId('service_id');
             $table->foreignId('client_id');
-            $table->boolean('isApproved');
+            $table->boolean('isApproved')->default(false);
             $table->date('date');
             $table->timestamps();
         });
