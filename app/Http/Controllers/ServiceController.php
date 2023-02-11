@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Http\Resources\ServiceResource;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends BaseController
 {
     public function all_services() { 
         $services = Service::all();
 
-        return $this->sendResponse(ServiceResource::collection($services), "OK");
+        //find type of service(id:4)
+        $serviceType = Service::find(4)->type;
+
+        //find price of service(id:1)
+        $serviceTypePrice = Service::find(1)->type->price; 
+
+        //get service by typeid
+        $servicesByTypeId = Service::where('type_id', 2)->get();
+
+
+        return $services;
+        // return $this->sendResponse(ServiceResource::collection($services), "OK");
 
     }
 
@@ -26,10 +38,43 @@ class ServiceController extends BaseController
 
     }
 
-    public function add_new_service(Request $request) { }
+    public function add_new_service(Request $request) { 
+        $input = $request->all();
 
-    public function modify_service(Request $request, $id) { }
+        $validator = Validator::make($input, [
+            "name" => "required",
+            "type_id" => "required"
+        ]);
 
+        if ($validator->fails()) {
+            return $this->sendError( $validator->errors());
+        }
+
+        $service = Service::create($input);
+
+        return $this->sendResponse( new ServiceResource($service), "Szolgaltatas felveve");
+    }
+
+    public function modify_service(Request $request, $id) {
+        $input = $request->all();
+
+        $validator = Validator::make( $input, [
+          "name" => "required",
+          "type_id" => "required"
+
+        ]);
+    
+        if ($validator->fails()) {
+          return $this->sendError( $validator->errors());
+        }
+    
+        $service = Service::find($id);
+        $service->update($input);
+    
+        return $this->sendResponse( new ServiceResource($service), "Szolgaltatas adatok frissitve");
+      }
+
+    
     public function remove_service($id) { 
         Service::destroy($id);
 

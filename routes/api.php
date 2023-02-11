@@ -5,7 +5,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
-use App\Models\Product;
+use App\Http\Controllers\TypeController;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,19 @@ Route::get('services/{id}', [ServiceController::class, 'get_service_by_id']);
 Route::post('services', [ServiceController::class, 'add_new_service']);
 Route::put('/services/{id}', [ServiceController::class, 'modify_service']);
 Route::delete('services/{id}', [ServiceController::class, 'remove_service']);
+
+Route::get('types', [TypeController::class, 'all_types']);
+Route::get('types/{id}', [TypeController::class, 'get_type_by_id']);
+Route::post('types', [TypeController::class, 'add_new_type']);
+Route::put('types/{id}', [TypeController::class, 'modify_type']);
+Route::delete('types/{id}', [TypeController::class, 'remove_type']);
+
+Route::get('durations', [TypeController::class, 'get_durations']);
+Route::get('prices', [TypeController::class, 'get_prices']);
+Route::post('durations', [TypeController::class, 'add_duration']);
+Route::post('prices', [TypeController::class, 'add_price']);
+
+
 
 Route::get('/bookings', [BookingController::class, 'all_bookings']);
 Route::get('bookings/{id}', [BookingController::class, 'get_booking_by_id']);

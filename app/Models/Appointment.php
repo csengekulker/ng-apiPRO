@@ -16,7 +16,11 @@ class Appointment extends Model
         'date'
     ];
 
-    public function client() { }
+    public function client() { 
+        return $this->hasOne(Client::class);
+    }
 
-    public function service() { }
+    public function service() { 
+        return $this->hasOne(Service::class);
+    }
 }

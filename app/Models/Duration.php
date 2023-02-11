@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Type;
 
 class Duration extends Model
 {
@@ -15,5 +16,7 @@ class Duration extends Model
         'duration'
     ];
 
-    public function type() { }
+    public function type() { 
+        return $this->hasMany(Type::class);
+    }
 }

@@ -15,5 +15,7 @@ class Price extends Model
         'price'
     ];
 
-    public function type() { }
+    public function type() { 
+        return $this->hasMany(Type::class);
+    }
 }

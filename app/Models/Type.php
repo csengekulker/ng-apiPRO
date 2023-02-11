@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Service;
 
 class Type extends Model
 {
@@ -18,10 +19,14 @@ class Type extends Model
     ];
 
     public function service() { 
-        return $this->belongsTo(Service::class);
+        return $this->hasMany(Service::class);
     }
 
-    public function duration() { }
+    public function duration() { 
+        return $this->belongsTo(Duration::class);
+    }
 
-    public function price() { }
+    public function price() { 
+        return $this->belongsTo((Price::class));
+    }
 }

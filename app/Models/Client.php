@@ -21,5 +21,7 @@ class Client extends Model
         'fullAddress' //??
     ];
 
-    public function appointment() { }
+    public function appointment() { 
+        return $this->belongsTo(Appointment::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Type;
 
 class Service extends Model
 {
@@ -12,13 +13,16 @@ class Service extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        "name"
+        "name",
+        "type_id"
     ];
 
-    public function appointment() { }
+    public function appointment() { 
+        return $this->belongsTo(Appointment::class);
+    }
 
     public function type() { 
-        return $this->hasMany(Type::class, 'type_id');
+        return $this->belongsTo(Type::class);
     }
 
     
