@@ -4,8 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClientController;
-
-
+use App\Http\Controllers\ServiceController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +38,18 @@ Route::post('/clients', [ClientController::class, 'add_new_client']);
 Route::put('/clients/{id}', [ClientController::class, 'modify_client']);
 Route::delete('clients/{id}', [ClientController::class, 'remove_client']);
 
+Route::get('/services', [ServiceController::class, 'all_services']);
+Route::get('services/{id}', [ServiceController::class, 'get_service_by_id']);
+Route::post('services', [ServiceController::class, 'add_new_service']);
+Route::put('/services/{id}', [ServiceController::class, 'modify_service']);
+Route::delete('services/{id}', [ServiceController::class, 'remove_service']);
+
 Route::get('/bookings', [BookingController::class, 'all_bookings']);
-Route::post('bookings', [BookingController::class, 'new_booking']);
+Route::get('bookings/{id}', [BookingController::class, 'get_booking_by_id']);
+Route::post('bookings', [BookingController::class, 'add_new_booking']);
+Route::post('/bookings/{id}', [BookingController::class, 'approve_booking']);
+Route::put('bookings/{id}', [BookingController::class, 'modify_booking']);
+Route::delete('bookings/{id}', [BookingController::class, 'remove_booking']);
 
 Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/signin', [AuthController::class, 'login']);

@@ -10,4 +10,18 @@ class Type extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'type',
+        'duration_id',
+        'price_id'
+    ];
+
+    public function service() { 
+        return $this->belongsTo(Service::class);
+    }
+
+    public function duration() { }
+
+    public function price() { }
 }

@@ -20,4 +20,6 @@ class Client extends Model
         'phone',
         'fullAddress' //??
     ];
+
+    public function appointment() { }
 }

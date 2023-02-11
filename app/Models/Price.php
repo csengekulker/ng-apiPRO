@@ -14,4 +14,6 @@ class Price extends Model
     protected $fillable =[
         'price'
     ];
+
+    public function type() { }
 }

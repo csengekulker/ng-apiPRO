@@ -15,5 +15,13 @@ class Service extends Model
         "name"
     ];
 
+    public function appointment() { }
+
+    public function type() { 
+        return $this->hasMany(Type::class, 'type_id');
+    }
+
+    
+
     
 }
