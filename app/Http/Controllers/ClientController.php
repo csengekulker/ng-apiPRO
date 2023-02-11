@@ -22,7 +22,6 @@ class ClientController extends BaseController
     $input = $request->all();
     $id = $request->id;
 
-    print_r($input);
 
     //TODO: verify if client exists, add on condition
     $clients = $this->get_client_by_id($id);
@@ -30,7 +29,7 @@ class ClientController extends BaseController
     $validator = Validator::make($input, [
       "fullName" => "required",
       "dob" => "required",
-      "email" => "required",
+      "email" => "required|unique:clients",
       "phone" => "required",
       "fullAddress" => "required",
 
@@ -61,5 +60,8 @@ class ClientController extends BaseController
   }
   public function remove_client($id)
   {
+    Client::destroy($id);
+
+    return $this->sendResponse([], "Vendeg torolve");
   }
 }

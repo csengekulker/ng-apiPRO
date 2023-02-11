@@ -17,7 +17,8 @@ class BookingController extends BaseController
   public function all_bookings()
   {
   }
-  public function new_booking()
+  public function new_booking(Request $request)
   {
+    $input = $request->all();
   }
 }
