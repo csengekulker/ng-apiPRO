@@ -33,7 +33,7 @@ class BookingController extends BaseController
     $validator = Validator::make($input, [
       "service_id" => "required",
       "client_id" => "required",
-      "date" => "required"
+      "appointment_id" => "required"
 
     ]);
 

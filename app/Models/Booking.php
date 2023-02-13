@@ -12,8 +12,8 @@ class Booking extends Model
     protected $fillable = [
         'service_id',
         'client_id',
+        'appointment_id',
         'isApproved',
-        'date'
     ];
 
     public function client() { 
