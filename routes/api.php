@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingController;
@@ -30,9 +31,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     ->except('index');
 // });
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::post('/products', [ProductController::class, 'store']);
-
 Route::get('/clients', [ClientController::class, 'all_clients']);
 Route::get('clients/{id}', [ClientController::class, 'get_client_by_id']);
 Route::post('/clients', [ClientController::class, 'add_new_client']);
@@ -56,13 +54,19 @@ Route::get('prices', [TypeController::class, 'get_prices']);
 Route::post('durations', [TypeController::class, 'add_duration']);
 Route::post('prices', [TypeController::class, 'add_price']);
 
-
+Route::get('/appointments', [AppointmentController::class, 'all_apts']);
+Route::get('appointments/{id}', [AppointmentController::class, 'get_apt_by_id']);
+Route::post('appointments/add-apt', [AppointmentController::class, 'new_apt']);
+Route::post('appointments/fill-calendar', [AppointmentController::class, 'fill_calendar']);
+Route::put('/appointments/reserve/{id}', [AppointmentController::class, 'reserve_apt']);
+Route::put('/appointments/{id}', [AppointmentController::class, 'modify_apt']);
+Route::delete('appointments/{id}', [AppointmentController::class, 'remove_apt']);
 
 Route::get('/bookings', [BookingController::class, 'all_bookings']);
 Route::get('bookings/{id}', [BookingController::class, 'get_booking_by_id']);
 Route::post('bookings', [BookingController::class, 'add_new_booking']);
-Route::put('/bookings/{id}', [BookingController::class, 'approve_booking']);
-// Route::put('bookings/{id}', [BookingController::class, 'modify_booking']);
+Route::put('/bookings/approve/{id}', [BookingController::class, 'approve_booking']);
+Route::put('bookings/{id}', [BookingController::class, 'modify_booking']);
 Route::delete('bookings/{id}', [BookingController::class, 'remove_booking']);
 
 Route::post('/signup', [AuthController::class, 'register']);

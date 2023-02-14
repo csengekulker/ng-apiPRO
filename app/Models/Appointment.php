@@ -15,4 +15,6 @@ class Appointment extends Model
         'min',
         'isOpen'
     ];
+
+    //TODO:eloquent relations
 }
