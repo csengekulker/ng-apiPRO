@@ -15,6 +15,12 @@ class AppointmentController extends BaseController
         return $this->sendResponse(AppointmentResource::collection($apts), "OK");
     }
 
+    public function all_open_apts() { 
+        $apts = Appointment::where('isOpen', 1)->get();
+
+        return $this->sendResponse(AppointmentResource::collection($apts), "OK");
+    }
+
     public function get_apt_by_id(Request $request, $id) { 
         $apt = Appointment::find($id);
 

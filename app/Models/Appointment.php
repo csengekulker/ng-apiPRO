@@ -17,4 +17,7 @@ class Appointment extends Model
     ];
 
     //TODO:eloquent relations
+    public function booking() {
+        return $this->belongsTo(Booking::class);
+    }
 }

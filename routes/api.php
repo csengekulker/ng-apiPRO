@@ -45,6 +45,8 @@ Route::delete('services/{id}', [ServiceController::class, 'remove_service']);
 
 Route::get('types', [TypeController::class, 'all_types']);
 Route::get('types/{id}', [TypeController::class, 'get_type_by_id']);
+Route::get('services/{id}/types', [TypeController::class, 'get_types_by_serviceid']);
+
 Route::post('types', [TypeController::class, 'add_new_type']);
 Route::put('types/{id}', [TypeController::class, 'modify_type']);
 Route::delete('types/{id}', [TypeController::class, 'remove_type']);
@@ -55,6 +57,7 @@ Route::post('durations', [TypeController::class, 'add_duration']);
 Route::post('prices', [TypeController::class, 'add_price']);
 
 Route::get('/appointments', [AppointmentController::class, 'all_apts']);
+Route::get('/appointments/open', [AppointmentController::class, 'all_open_apts']);
 Route::get('appointments/{id}', [AppointmentController::class, 'get_apt_by_id']);
 Route::post('appointments/add-apt', [AppointmentController::class, 'new_apt']);
 Route::post('appointments/fill-calendar', [AppointmentController::class, 'fill_calendar']);
