@@ -39,10 +39,7 @@ Route::post('types', [TypeController::class, 'add_new_type']);
 Route::put('types/{id}', [TypeController::class, 'modify_type']);
 Route::delete('types/{id}', [TypeController::class, 'remove_type']);
 
-Route::get('durations', [TypeController::class, 'get_durations']);
-Route::get('prices', [TypeController::class, 'get_prices']);
-Route::post('durations', [TypeController::class, 'add_duration']);
-Route::post('prices', [TypeController::class, 'add_price']);
+
 
 Route::get('/appointments', [AppointmentController::class, 'all_apts']);
 Route::get('/appointments/open', [AppointmentController::class, 'open_apts']);

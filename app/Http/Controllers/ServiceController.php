@@ -21,8 +21,6 @@ class ServiceController extends BaseController
         //get service by typeid
         // $servicesByTypeId = Service::where('type_id', 2)->get();
 
-
-        // return $services;
         return $this->sendResponse(ServiceResource::collection($services), "OK");
 
     }
@@ -43,7 +41,6 @@ class ServiceController extends BaseController
 
         $validator = Validator::make($input, [
             "name" => "required",
-            // "type_id" => "required"
         ]);
 
         if ($validator->fails()) {
@@ -60,7 +57,6 @@ class ServiceController extends BaseController
 
         $validator = Validator::make( $input, [
           "name" => "required",
-          "type_id" => "required"
 
         ]);
     

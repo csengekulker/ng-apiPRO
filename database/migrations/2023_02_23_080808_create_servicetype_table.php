@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDurationsTable extends Migration
+class CreateServicetypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDurationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('durations', function (Blueprint $table) {
+        Schema::create('servicetype', function (Blueprint $table) {
             $table->id();
-            $table->integer('duration');
+            $table->foreignId('service_id');
+            $table->foreignId('type_id');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateDurationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('durations');
+        Schema::dropIfExists('servicetype');
     }
 }

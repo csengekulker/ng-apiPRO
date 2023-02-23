@@ -13,20 +13,10 @@ class Type extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'type',
-        'duration_id',
-        'price_id'
+        'name',
+        'duration',
+        'price'
     ];
 
-    public function service() { 
-        return $this->hasMany(Service::class);
-    }
 
-    public function duration() { 
-        return $this->belongsTo(Duration::class);
-    }
-
-    public function price() { 
-        return $this->belongsTo((Price::class));
-    }
 }

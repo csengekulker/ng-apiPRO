@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Models\Booking;
 use App\Http\Resources\BookingResource;
-use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,7 +34,7 @@ class BookingController extends BaseController
 
     $validator = Validator::make($input, [
       "service_id" => "required",
-      "type_id" => "required",
+      "client_id" => "required",
       "appointment_id" => "required"
 
     ]);

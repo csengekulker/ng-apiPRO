@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
-use App\Http\Resources\DurationResource;
-use App\Http\Resources\PriceResource;
 use App\Models\Type;
 use App\Http\Resources\TypeResource;
-use App\Models\Duration;
-use App\Models\Price;
-use App\Models\Service;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,9 +29,9 @@ class TypeController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            "type" => "required",
-            "duration_id" => "required",
-            "price_id" => "required"
+            "name" => "required",
+            "duration" => "required",
+            "price" => "required"
         ]);
 
         if ($validator->fails()) {
@@ -52,8 +48,8 @@ class TypeController extends BaseController
 
         $validator = Validator::make( $input, [
           "name" => "required",
-          "duration_id" => "required",
-          "price_id" => "required"
+          "duration" => "required",
+          "price" => "required"
 
         ]);
     
@@ -73,29 +69,4 @@ class TypeController extends BaseController
         return $this->sendResponse([], "Tipus torolve");
     }
 
-    // duration, price endpoints
-
-    public function add_duration(Request $request) { 
-        $duration = Duration::create($request->all());
-
-        return $this->sendResponse( new DurationResource($duration), "Idotartam felveve");
-    }
-
-    public function add_price(Request $request) { 
-        $price = Price::create($request->all());
-
-        return $this->sendResponse( new PriceResource($price), "Ar felveve");
-    }
-
-    public function get_durations() { 
-        $durations = Duration::all();
-
-        return $this->sendResponse(DurationResource::collection($durations), "OK");
-    }
-
-    public function get_prices() { 
-        $prices = Price::all();
-
-        return $this->sendResponse(PriceResource::collection($prices), "OK");
-    }
 } 
