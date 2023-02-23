@@ -13,17 +13,17 @@ class ServiceController extends BaseController
         $services = Service::all();
 
         //find type of service(id:4)
-        $serviceType = Service::find(4)->type;
+        // $serviceType = Service::find(4)->type;
 
         //find price of service(id:1)
-        $serviceTypePrice = Service::find(1)->type->price; 
+        // $serviceTypePrice = Service::find(1)->type->price; 
 
         //get service by typeid
-        $servicesByTypeId = Service::where('type_id', 2)->get();
+        // $servicesByTypeId = Service::where('type_id', 2)->get();
 
 
-        return $services;
-        // return $this->sendResponse(ServiceResource::collection($services), "OK");
+        // return $services;
+        return $this->sendResponse(ServiceResource::collection($services), "OK");
 
     }
 
@@ -43,7 +43,7 @@ class ServiceController extends BaseController
 
         $validator = Validator::make($input, [
             "name" => "required",
-            "type_id" => "required"
+            // "type_id" => "required"
         ]);
 
         if ($validator->fails()) {

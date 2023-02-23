@@ -12,16 +12,14 @@ class Client extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        //clientdetails from frontend
-        //match table (tbd)
         'fullName',
         'dob',
         'email',
         'phone',
-        'fullAddress' //??
+        'fullAddress'
     ];
 
-    public function appointment() { 
-        return $this->belongsTo(Appointment::class);
+    public function appointments() { 
+        return $this->hasMany(Appointment::class);
     }
 }

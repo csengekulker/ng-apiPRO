@@ -17,8 +17,8 @@ class AppointmentResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => $this->date,
-            'hour' => $this->hour,
-            'min' => $this->min,
+            'start' => $this->start,
+            'end' => $this->end,
             'isOpen' => $this->isOpen,
           ];    }
 }

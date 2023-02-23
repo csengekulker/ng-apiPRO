@@ -11,10 +11,13 @@ class Appointment extends Model
 
     protected $fillable = [
         'date',
-        'hour',
-        'min',
+        'start',
+        'end',
         'isOpen'
     ];
 
     //TODO:eloquent relations
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
 }

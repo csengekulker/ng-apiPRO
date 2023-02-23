@@ -23,4 +23,6 @@ class Booking extends Model
     public function service() { 
         return $this->hasOne(Service::class);
     }
+
+
 }
