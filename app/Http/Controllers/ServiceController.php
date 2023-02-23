@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Http\Resources\ServiceResource;
+use App\Models\Type;
 use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends BaseController
@@ -24,6 +25,8 @@ class ServiceController extends BaseController
         // $servicesByTypeId = Service::where('type_id', 2)->get();
 
         return $this->sendResponse(ServiceResource::collection($services), "OK");
+
+        // return Type::find(1)->services;
 
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicetypeTable extends Migration
+class CreateServiceTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateServicetypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('servicetype', function (Blueprint $table) {
+        Schema::create('service_type', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id');
             $table->foreignId('type_id');
@@ -28,6 +28,6 @@ class CreateServicetypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('servicetype');
+        Schema::dropIfExists('service_type');
     }
 }

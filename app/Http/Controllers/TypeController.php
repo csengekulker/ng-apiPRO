@@ -12,9 +12,9 @@ class TypeController extends BaseController
 {
     public function all_types() { 
 
-        $types = Type::all();
+        $types = Type::find(1)->services;
 
-        $types = Type::with('duration', 'price')->get();
+        // $types = Type::with('duration', 'price')->get();
 
         return $types;
         // return $this->sendResponse(TypeResource::collection($types), "OK");
