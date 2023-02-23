@@ -16,8 +16,4 @@ class Appointment extends Model
         'isOpen'
     ];
 
-    //TODO:eloquent relations
-    public function client() {
-        return $this->belongsTo(Client::class);
-    }
 }

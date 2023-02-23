@@ -16,13 +16,4 @@ class Booking extends Model
         'isApproved',
     ];
 
-    public function client() { 
-        return $this->hasOne(Client::class);
-    }
-
-    public function service() { 
-        return $this->hasOne(Service::class);
-    }
-
-
 }

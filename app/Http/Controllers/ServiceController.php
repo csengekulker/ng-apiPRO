@@ -12,8 +12,10 @@ class ServiceController extends BaseController
     public function all_services() { 
         $services = Service::all();
 
+        // $services = Service::with('type')->get();
+
         //find type of service(id:4)
-        // $serviceType = Service::find(4)->type;
+        // $serviceType = Service::find(3)->type;
 
         //find price of service(id:1)
         // $serviceTypePrice = Service::find(1)->type->price; 
