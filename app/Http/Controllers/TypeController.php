@@ -14,10 +14,8 @@ class TypeController extends BaseController
 
         $types = Type::find(1)->services;
 
-        // $types = Type::with('duration', 'price')->get();
 
-        return $types;
-        // return $this->sendResponse(TypeResource::collection($types), "OK");
+        return $this->sendResponse(TypeResource::collection($types), "OK");
     }
 
     public function get_type_by_id($id) {

@@ -48,7 +48,6 @@ class AppointmentController extends BaseController
 
         return $this->sendResponse( new AppointmentResource($apt), "Idopont rogzitve.");
 
-
     }
 
     public function fill_calendar(Request $request) { 
@@ -69,8 +68,6 @@ class AppointmentController extends BaseController
 
         return $this->sendResponse( new AppointmentResource($apt), "sikeres foglalas");
 
-
-
         // $validator = Validator::make( $open, [
         //     'isOpen' => 'required'
         // ]);
@@ -87,7 +84,8 @@ class AppointmentController extends BaseController
         $validator = Validator::make( $input, [
             'date' => 'required',
             'start' => 'required',
-            'end' => 'required'
+            'end' => 'required',
+            'isOpen' => 'required'
         ]);
     
         if ($validator->fails()) {

@@ -20,10 +20,6 @@ class ClientController extends BaseController
     $input = $request->all();
     $id = $request->id;
 
-
-    //TODO: verify if client exists, add on condition
-    $clients = $this->get_client_by_id($id);
-
     $validator = Validator::make($input, [
       "fullName" => "required",
       "dob" => "required",

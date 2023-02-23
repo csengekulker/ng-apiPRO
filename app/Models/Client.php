@@ -19,7 +19,4 @@ class Client extends Model
         'fullAddress'
     ];
 
-    public function appointments() { 
-        return $this->hasMany(Appointment::class);
-    }
 }
