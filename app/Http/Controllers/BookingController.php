@@ -14,11 +14,15 @@ class BookingController extends BaseController
   public function all_bookings() { 
     $bookings = Booking::all();
 
-    return $this->sendResponse(BookingResource::collection($bookings), "OK");
+    // $bookings = Booking::find(3)->appointment;
+
+    return $bookings;
+
+    // return $this->sendResponse(BookingResource::collection($bookings), "OK");
   }
 
   public function get_booking_by_id($id) { 
-    $booking = Booking::find($id);
+    $booking = Booking::find($id)->appointment;
 
     if ( is_null($booking)) {
       return $this->sendError("Foglalas nem talalhato.");

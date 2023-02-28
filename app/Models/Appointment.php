@@ -16,4 +16,8 @@ class Appointment extends Model
         'isOpen'
     ];
 
+    public function booking() {
+        return $this->hasOne(Booking::class);
+    }
+
 }

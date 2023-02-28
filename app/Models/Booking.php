@@ -16,4 +16,8 @@ class Booking extends Model
         'isApproved',
     ];
 
+    public function appointment() {
+        return $this->belongsTo(Appointment::class);
+    }
+
 }
