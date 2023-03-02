@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MailerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeController;
 use App\Models\Type;
@@ -41,7 +43,11 @@ Route::post('types', [TypeController::class, 'add_new_type']);
 Route::put('types/{id}', [TypeController::class, 'modify_type']);
 Route::delete('types/{id}', [TypeController::class, 'remove_type']);
 
+Route::get('messages', [ContactController::class, 'index']);
+Route::get('messages/{id}', [ContactController::class, 'get_message_by_id']);
+Route::post('/messages', [ContactController::class, 'new_message']);
 
+Route::post('send-reply/{id}', [MailerController::class, 'composeEmail']);
 
 Route::get('/appointments', [AppointmentController::class, 'all_apts']);
 Route::get('/appointments/open', [AppointmentController::class, 'all_open_apts']);
