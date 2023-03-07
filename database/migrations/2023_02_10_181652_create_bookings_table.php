@@ -16,6 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id');
+            $table->foreignId('type_id');
             $table->foreignId('client_id');
             $table->foreignId('appointment_id');
             $table->boolean('isApproved')->default(false);

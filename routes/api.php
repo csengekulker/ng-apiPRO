@@ -60,7 +60,7 @@ Route::delete('appointments/{id}', [AppointmentController::class, 'remove_apt'])
 
 Route::get('/bookings', [BookingController::class, 'all_bookings']);
 Route::get('bookings/{id}', [BookingController::class, 'get_booking_by_id']);
-Route::post('bookings', [BookingController::class, 'add_new_booking']);
+Route::post('/bookings', [BookingController::class, 'add_new_booking']);
 Route::put('/bookings/approve/{id}', [BookingController::class, 'approve_booking']);
 Route::put('bookings/{id}', [BookingController::class, 'modify_booking']);
 Route::delete('bookings/{id}', [BookingController::class, 'remove_booking']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Models\Booking;
 use App\Http\Resources\BookingResource;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +23,7 @@ class BookingController extends BaseController
   }
 
   public function get_booking_by_id($id) { 
-    $booking = Booking::find($id)->appointment;
+    $booking = Booking::find($id);
 
     if ( is_null($booking)) {
       return $this->sendError("Foglalas nem talalhato.");
@@ -34,13 +35,14 @@ class BookingController extends BaseController
   public function add_new_booking(Request $request)  { 
     $input = $request->all();
 
-    //TODO: verify if given apt_id exists and unique
+    //  TODO: apt id has to be unique, used once
+    // client with client_id has to exist
 
     $validator = Validator::make($input, [
       "service_id" => "required",
+      "type_id" => "required",
       "client_id" => "required",
       "appointment_id" => "required"
-
     ]);
 
     if ($validator->fails()) {
