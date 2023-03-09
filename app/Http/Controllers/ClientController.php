@@ -18,7 +18,7 @@ class ClientController extends BaseController
     return $this->sendResponse(ClientResource::collection($clients), "OK");
   }
 
-  public function add_new_client(Request $request)
+  public function new_client(Request $request)
   {
     $input = $request->all();
 

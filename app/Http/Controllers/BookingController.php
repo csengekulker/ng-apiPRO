@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Models\Booking;
 use App\Http\Resources\BookingResource;
-use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,8 +13,6 @@ class BookingController extends BaseController
 
   public function all_bookings() { 
     $bookings = Booking::all();
-
-    // $bookings = Booking::find(3)->appointment;
 
     return $bookings;
 
@@ -32,7 +29,7 @@ class BookingController extends BaseController
     return $this->sendResponse( new BookingResource($booking), "A foglalas adatai");
   }
 
-  public function add_new_booking(Request $request)  { 
+  public function new_booking(Request $request)  { 
     $input = $request->all();
 
     //  TODO: apt id has to be unique, used once

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactController extends BaseController
 {
-    public function index() {
+    public function all_messages() {
 
         $messages = Message::all();
 
@@ -46,6 +46,10 @@ class ContactController extends BaseController
         return $this->sendResponse(new MessageResource($message), "Uzenet rogzitve");
     }
 
-    //no modify or destroy needed
+    public function remove_message($id) {
+        Message::destroy($id);
+
+        return $this->sendResponse([], "Uzenet torolve");
+    }
 
 }
