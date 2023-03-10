@@ -14,9 +14,6 @@ class ServiceController extends BaseController
         $services = Service::all();
 
         return $this->sendResponse(ServiceResource::collection($services), "OK");
-
-        // return Type::find(1)->services;
-
     }
 
     public function get_service_by_id($id) { 
@@ -27,7 +24,6 @@ class ServiceController extends BaseController
         }
 
         return $this->sendResponse( new ServiceResource($service), "A szolgaltatas adatai");
-
     }
 
     public function add_new_service(Request $request) { 
@@ -69,6 +65,5 @@ class ServiceController extends BaseController
         Service::destroy($id);
 
         return $this->sendResponse([], "Szolgaltatas torolve");
-
     }
 }

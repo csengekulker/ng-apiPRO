@@ -50,15 +50,14 @@ Route::get('/appointments', [AppointmentController::class, 'all_apts']);
 Route::get('/appointments/open', [AppointmentController::class, 'all_open_apts']);
 Route::get('/appointments/{id}', [AppointmentController::class, 'get_apt_by_id']);
 Route::post('/appointments', [AppointmentController::class, 'new_apt']);
-// Route::post('/appointments/fill', [AppointmentController::class, 'fill_calendar']);
-// Route::put('/appointments/reserve/{id}', [AppointmentController::class, 'reserve_apt']);
+Route::put('/appointments/reserve/{id}', [AppointmentController::class, 'reserve_apt']);
 Route::put('/appointments/{id}', [AppointmentController::class, 'modify_apt']);
 Route::delete('/appointments/{id}', [AppointmentController::class, 'remove_apt']);
 
 Route::get('/bookings', [BookingController::class, 'all_bookings']);
 Route::get('/bookings/{id}', [BookingController::class, 'get_booking_by_id']);
 Route::post('/bookings', [BookingController::class, 'new_booking']);
-// Route::put('/bookings/approve/{id}', [BookingController::class, 'approve_booking']);
+Route::put('/bookings/approve/{id}', [BookingController::class, 'approve_booking']);
 Route::put('/bookings/{id}', [BookingController::class, 'modify_booking']);
 Route::delete('/bookings/{id}', [BookingController::class, 'remove_booking']);
 

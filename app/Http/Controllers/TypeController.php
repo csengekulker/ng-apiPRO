@@ -12,8 +12,6 @@ class TypeController extends BaseController
 {
     public function all_types() { 
 
-        // $types = Type::find(1)->services;
-
         $types = Type::all();
 
         return $this->sendResponse(TypeResource::collection($types), "OK");

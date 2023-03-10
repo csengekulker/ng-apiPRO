@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Models\Booking;
 use App\Http\Resources\BookingResource;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,35 +52,31 @@ class BookingController extends BaseController
     return $this->sendResponse( new BookingResource($booking), "Foglalas rogzitve");
   }
 
-  public function approve_booking(Request $request, $id) { 
+  public function approve_booking($id) { 
+
     $booking = Booking::find($id);
+    $apt = Appointment::find($booking['appointment_id']);
+    $approved = $booking['isApproved'];
+    $open = $apt['isOpen'];
 
     if (is_null($booking)) { 
-      return $this->sendError("Nincs ilyen foglalas");
+      return $this->sendError("Nincs ilyen foglalas.");
     }
 
-    // when a booking is approved, an appointment is reserved
+    // when a booking is approved, its appointment is reserved
 
-    // find apt on apt_id, set isOpen false
-
-    $approved = $booking['isApproved'];
-
-    if ($approved ) {
-      return "Mar jovahagyva";
-    } else { 
+    if ($approved) {
+      return $this->sendError("Mar jovahagyva.");
+    } else if (!$open) { 
+      return $this->sendError("Mar foglalt.");
+    } else {
       $booking->update(['isApproved' => true]);
+      $apt->update(['isOpen' => false]);
 
-      //TODO: missing eloquent ORM
-      // $apt = Appointment::find($request->appointment_id);
-      // $apt->update(['isOpen' => false]);
+      return $this->sendResponse( new BookingResource($booking), "Foglalas jovahagyva, idopont lefoglalva.");
 
-      //call reserve_apt($apt_id)
-
-      return $this->sendResponse( new BookingResource($booking), "foglalas jovahagyva");
-
+      //TODO: send mail with response MailerController
     }
-
-    return $approved;
   }
 
   public function modify_booking(Request $request, $id) { 

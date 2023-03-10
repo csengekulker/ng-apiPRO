@@ -21,7 +21,7 @@ class AppointmentController extends BaseController
         return $this->sendResponse(AppointmentResource::collection($apts), "OK");
     }
 
-    public function get_apt_by_id(Request $request, $id) { 
+    public function get_apt_by_id($id) { 
         $apt = Appointment::find($id);
 
         if (is_null($apt)) {
@@ -50,32 +50,16 @@ class AppointmentController extends BaseController
 
     }
 
-    public function fill_calendar(Request $request) { 
-        //list of apts, foreach new_apt()
-    }
-
-    public function reserve_apt(Request $request, $id) { 
-        // called from approve_booking
+    public function reserve_apt($id) { 
         $apt = Appointment::find($id);
 
-        $open = $apt['isOpen'];
-
-        if (!$open) {
-            return $this->sendError("mar foglalt");
+        if (is_null($apt)) {
+            return $this->sendError("Idopont nem talalhato.");
         }
 
         $apt->update(['isOpen' => false]);
 
-        return $this->sendResponse( new AppointmentResource($apt), "sikeres foglalas");
-
-        // $validator = Validator::make( $open, [
-        //     'isOpen' => 'required'
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return $this->sendError( $validator->errors());
-        // }
-
+        return $this->sendResponse( new AppointmentResource($apt), "Idopont lefoglalva.");
     }
 
     public function modify_apt(Request $request, $id) { 
