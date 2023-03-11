@@ -10,16 +10,13 @@ use Illuminate\Http\Request;
 
 class ClientController extends BaseController
 {
-  public function all_clients()
-  {
-
+  public function all_clients() {
     $clients = Client::all();
 
     return $this->sendResponse(ClientResource::collection($clients), "OK");
   }
 
-  public function new_client(Request $request)
-  {
+  public function new_client(Request $request) {
     $input = $request->all();
 
     $validator = Validator::make($input, [
@@ -39,11 +36,10 @@ class ClientController extends BaseController
 
     $client = Client::create($input);
 
-    return $this->sendResponse(new ClientResource($client), "Vendeg felvéve, id.$client->id.");
+    return $this->sendResponse(new ClientResource($client), "Vendeg felvéve, id $client->id.");
   }
 
-  public function get_client_by_id($id)
-  {
+  public function get_client_by_id($id) {
     $client = Client::find($id);
 
     if (is_null($client)) {
@@ -53,8 +49,7 @@ class ClientController extends BaseController
     return $this->sendResponse(new ClientResource($client), "A vendeg adatai");
   }
 
-  public function modify_client(Request $request, $id)
-  {
+  public function modify_client(Request $request, $id) {
     $input = $request->all();
 
     $validator = Validator::make($input, [
@@ -76,8 +71,7 @@ class ClientController extends BaseController
     return $this->sendResponse(new ClientResource($client), "Vendeg adatok frissitve");
   }
 
-  public function remove_client($id)
-  {
+  public function remove_client($id) {
     Client::destroy($id);
 
     return $this->sendResponse([], "Vendeg torolve");

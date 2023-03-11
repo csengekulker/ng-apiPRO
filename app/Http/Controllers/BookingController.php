@@ -17,7 +17,6 @@ class BookingController extends BaseController
 
     return $bookings;
 
-    // return $this->sendResponse(BookingResource::collection($bookings), "OK");
   }
 
   public function get_booking_by_id($id) { 
@@ -34,7 +33,6 @@ class BookingController extends BaseController
     $input = $request->all();
 
     //  TODO: apt id has to be unique, used once
-    // client with client_id has to exist
 
     $validator = Validator::make($input, [
       "service_id" => "required",

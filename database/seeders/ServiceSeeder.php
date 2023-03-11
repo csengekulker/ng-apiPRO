@@ -16,16 +16,16 @@ class ServiceSeeder extends Seeder
     {
         DB::table('services')->insert([
             [
-                'name' => 'Svedmasszazs'
+                'name' => 'Svédmasszázs'
             ],
             [
-                'name' => 'Sportmasszazs'
+                'name' => 'Sportmasszázs'
             ],
             [
-                'name' => 'Talpmasszazs'
+                'name' => 'Talpmasszázs'
             ],
             [
-                'name' => 'Magnesterapia'
+                'name' => 'Mágnesterápia'
             ]
         ]);
     }

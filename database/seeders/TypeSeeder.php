@@ -16,24 +16,29 @@ class TypeSeeder extends Seeder
     {
         DB::table('types')->insert([
             [
-                'name' => 'type1',
+                'name' => 'alsó test',
                 'duration' => 60,
                 'price' => 3000
             ],
             [
-                'name' => 'type1plus',
+                'name' => 'teljes test',
                 'duration' => 90,
+                'price' => 12000
+            ],
+            [
+                'name' => 'nyak | hát | váll',
+                'duration' => 60,
+                'price' => 7000
+            ],
+            [
+                'name' => 'talp',
+                'duration' => 30,
                 'price' => 6000
             ],
             [
-                'name' => 'type2',
-                'duration' => 30,
-                'price' => 1000
-            ],
-            [
-                'name' => 'type2plus',
+                'name' => 'felső test',
                 'duration' => 45,
-                'price' => 2000
+                'price' => 9000
             ]
             ]);
     }
