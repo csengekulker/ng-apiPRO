@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function register(Request $request) {
         $fields = $request->validate([
@@ -42,7 +40,7 @@ class AuthController extends Controller
             return response( "Hiba! A bejelentkezés sikertelen", [ "error" => "Hibás adatok" ]);
         }
     }
-    public function logout( Request $request ) {        
+    public function logout() {        
         auth( "sanctum" )->user()->currentAccessToken()->delete();
         return response()->json('Kijelentkezve');
     }     

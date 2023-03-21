@@ -22,7 +22,7 @@ class ClientController extends BaseController
     $validator = Validator::make($input, [
       "fullName" => "required",
       "dob" => "required",
-      "email" => "required|unique:clients",
+      "email" => "required",
       "phone" => "required",
       "fullAddress" => "required",
 
@@ -31,8 +31,6 @@ class ClientController extends BaseController
     if ($validator->fails()) {
       return $this->sendError($validator->errors());
     }
-
-    // TODO: send "client exists" response OR error
 
     $client = Client::create($input);
 

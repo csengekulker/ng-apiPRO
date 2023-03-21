@@ -44,7 +44,8 @@ Route::get('/messages/{id}', [ContactController::class, 'get_message_by_id']);
 Route::post('/messages', [ContactController::class, 'new_message']);
 Route::delete('/messages/{id}', [ContactController::class, 'remove_message']);
 
-Route::post('/send-reply/{id}', [MailerController::class, 'compose_email']);
+Route::post('/send-reply/{id}', [MailerController::class, 'compose_reply']);
+Route::post('/send-feedback/{id}', [MailerController::class, 'compose_feedback']);
 
 Route::get('/appointments', [AppointmentController::class, 'all_apts']);
 Route::get('/appointments/open', [AppointmentController::class, 'all_open_apts']);

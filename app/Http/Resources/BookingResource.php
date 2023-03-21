@@ -30,10 +30,10 @@ class BookingResource extends JsonResource
         
         return [
             'id' => $this->id,
-            'service_id' => new ServiceResource($service),
-            'type_id' => new TypeResource($type), 
+            'service' => new ServiceResource($service),
+            'type' => new TypeResource($type), 
             'client' => new ClientResource($client),
-            'appointment_id' => new AppointmentResource($apt),
+            'appointment' => new AppointmentResource($apt),
             'isApproved' => $this->isApproved,
           ];
     }

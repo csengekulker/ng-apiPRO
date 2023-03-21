@@ -32,13 +32,11 @@ class BookingController extends BaseController
   public function new_booking(Request $request)  { 
     $input = $request->all();
 
-    //  TODO: apt id has to be unique, used once
-
     $validator = Validator::make($input, [
       "service_id" => "required",
       "type_id" => "required",
       "client_id" => "required",
-      "appointment_id" => "required"
+      "appointment_id" => "required|unique:bookings"
     ]);
 
     if ($validator->fails()) {
@@ -50,7 +48,7 @@ class BookingController extends BaseController
     return $this->sendResponse( new BookingResource($booking), "Foglalas rogzitve");
   }
 
-  public function approve_booking($id) { 
+  public function approve_booking(Request $request, $id) { 
 
     $booking = Booking::find($id);
     $apt = Appointment::find($booking['appointment_id']);
@@ -61,7 +59,7 @@ class BookingController extends BaseController
       return $this->sendError("Nincs ilyen foglalas.");
     }
 
-    // when a booking is approved, its appointment is reserved
+    app('App\Http\Controllers\MailerController')->compose_feedback($request, $booking->id);
 
     if ($approved) {
       return $this->sendError("Mar jovahagyva.");
@@ -71,9 +69,8 @@ class BookingController extends BaseController
       $booking->update(['isApproved' => true]);
       $apt->update(['isOpen' => false]);
 
-      return $this->sendResponse( new BookingResource($booking), "Foglalas jovahagyva, idopont lefoglalva.");
+      return $this->sendResponse( new BookingResource($booking), "Foglalas jovahagyva, idopont lefoglalva, email elkuldve.");
 
-      //TODO: send mail with response MailerController
     }
   }
 
