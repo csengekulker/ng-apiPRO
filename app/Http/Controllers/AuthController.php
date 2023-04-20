@@ -2,46 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController as BaseController;
+use App\Models\User as MyUser;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends BaseController
 {
     public function register(Request $request) {
-        $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+        $validator = Validator::make( $request->all(), [
+            "name" => "required",
+            "email" => "required",
+            "password" => "required",
+            "confirm_password" => "required|same:password"
         ]);
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password'])
-        ]);
-        $token = $user->createToken('sajatToken')->plainTextToken;
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-        return response($response, 201);
+
+        if($validator->fails()) {
+            return $this->sendError( "Error validation", $validator->errors());
+        }
+
+        $input = $request->all();
+        $input["password"] = bcrypt( $input[ "password"]);
+        $user = MyUser::create( $input );
+        $success[ "name" ] = $user->name;
+
+        return $this->sendResponse( $success, "Sikeres regisztráció");
     }
+
     public function login(Request $request) {
-        if( Auth::attempt([ "name" => $request->name, "password" => $request->password ])) {
- 
+        if (Auth::attempt( [
+            "email" => $request->email,
+            "password" => $request->password
+        ])) {
+            /** @var \App\Models\User */
             $authUser = Auth::user();
-            $success[ "token" ] = $authUser->createToken( "myapptoken" )->plainTextToken;
+            $token = $authUser->createToken( "MyAuthApp" )->plainTextToken;
             $success[ "name" ] = $authUser->name;
- 
-            return response( $success);
- 
-        }else {
- 
-            return response( "Hiba! A bejelentkezés sikertelen", [ "error" => "Hibás adatok" ]);
+            $success[ "token" ] = $token;
+
+            return $this->sendResponse( $success, "Sikeres bejelentkezés" );
+
+        } else {
+            return $this->sendError( "Unauthorized", [ "error" => "Hibás adatok"], 401);
         }
     }
     public function logout() {        
-        auth( "sanctum" )->user()->currentAccessToken()->delete();
+        // auth( "sanctum" )->user()->currentAccessToken()->delete();
         return response()->json('Kijelentkezve');
     }     
 }
