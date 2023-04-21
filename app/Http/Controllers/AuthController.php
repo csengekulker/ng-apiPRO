@@ -47,8 +47,13 @@ class AuthController extends BaseController
             return $this->sendError( "Unauthorized", [ "error" => "Hibás adatok"], 401);
         }
     }
-    public function logout() {        
-        // auth( "sanctum" )->user()->currentAccessToken()->delete();
-        return response()->json('Kijelentkezve');
+    public function logout(Request $request) {   
+        $user = MyUser::where('name', $request->name)->first();
+
+        $user->tokens()->where('id', $request->tokenId)->delete();
+        return $this->sendResponse($user, 'logged out');
+        return response()->json(['message' => 'Kijelentkezve'], 200);
+
+
     }     
 }
