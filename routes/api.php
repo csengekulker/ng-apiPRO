@@ -20,6 +20,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('products', ProductController::class)
     ->except('index');
 
+Route::get('/clients/{id}', [ClientController::class, 'get_client_by_id']);
+Route::post('/clients', [ClientController::class, 'new_client']);
+Route::put('/clients/{id}', [ClientController::class, 'modify_client']);
+Route::delete('/clients/{id}', [ClientController::class, 'remove_client']);
+
 
 
 });
@@ -30,10 +35,7 @@ Route::post('/logout', [ AuthController::class, "logout"]);
 
 
 Route::get('/clients', [ClientController::class, 'all_clients']);
-Route::get('/clients/{id}', [ClientController::class, 'get_client_by_id']);
-Route::post('/clients', [ClientController::class, 'new_client']);
-Route::put('/clients/{id}', [ClientController::class, 'modify_client']);
-Route::delete('/clients/{id}', [ClientController::class, 'remove_client']);
+
 
 Route::get('/services', [ServiceController::class, 'all_services']);
 Route::get('/services/{id}', [ServiceController::class, 'get_service_by_id']);
